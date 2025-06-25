@@ -1,9 +1,0 @@
-/**
- * 
- */
-/**
- * @author RyanShen
- *
- */
-module MyFirstEclipse {
-}
