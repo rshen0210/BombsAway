@@ -1,0 +1,358 @@
+/*
+ * Ryan Shen
+ * 3/10/23
+ * KeyAndMouse
+ * This code makes an interactable animation frame.
+*/
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class KeyAndMouse 
+{
+	JFrame frame;
+	DrawingPanel canvas;
+	public static void main (String[] args) 
+	{
+		KeyAndMouse kt = new KeyAndMouse();
+		kt.Run();
+	} // end main
+ 
+	public void Run() 
+	{
+		frame = new JFrame("KeyAndMouse");
+		frame.setSize(600, 600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	  
+		canvas = new DrawingPanel();
+		frame.getContentPane().add(canvas);
+  
+		frame.setVisible(true);
+	}
+}
+ 
+class DrawingPanel extends JPanel implements KeyListener 
+{
+	private int ballX, ballY;
+	private int carX, carY;
+	private int car2X, car2Y;
+	private boolean ballMoveIt;  // starts and stops ball movement
+	private boolean carMoveIt;  // starts and stops car movement
+	private Timer balltimer, cartimer;
+	private boolean switchColor;
+	private boolean colorPink;
+	private int carSpeed;
+	private int ballSpeed;
+	private int carSpeed2;
+	private Timer cartimer2;
+	private boolean carMoveIt2;
+ 
+	public DrawingPanel() 
+	{
+		ballX = 200;
+		ballY = 10;
+		carX = 10;
+		car2X = 470;
+		carY = 400;
+		car2Y = 400;
+		carSpeed = 10;
+		carSpeed2 = 10;
+		ballSpeed = 5;
+		switchColor = false;
+		colorPink = false;
+		ballMoveIt = true;
+		carMoveIt = true;
+		carMoveIt2 = true;
+		addKeyListener(this);
+		// create timer for animation of ball
+		BallMover ballmover = new BallMover();
+		balltimer = new Timer(ballSpeed, ballmover);
+		//balltimer.stop();
+		balltimer.start();
+		// Format --> timer = new Timer( millisDelay, listener );
+		CarMover carmover = new CarMover();
+		cartimer = new Timer(carSpeed, carmover);
+		//cartimer.stop();
+		cartimer.start();
+		
+		CarMover1 carmover2 = new CarMover1();
+		cartimer2 = new Timer(carSpeed2, carmover2);
+		//cartimer.stop();
+		cartimer2.start();
+	}
+	class BallMover implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			// ball XY location
+			ballY++;
+			if (ballY > 470) {
+				ballY = 10;
+				ballX = (int)(Math.random() * 470) + 1;
+			}
+			repaint();
+			grabFocus();
+		}
+	} // end BallMover
+
+	class CarMover implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			// car XY location
+			carX++;
+			if (carX > 490) carX = 0;
+			repaint();
+			grabFocus();
+		}
+	} // end CarMover
+	
+	class CarMover1 implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			// car XY location
+			car2X--;
+			if (car2X < 10) car2X = 470;
+			repaint();
+			grabFocus();
+		}
+	}
+ 
+	public void paintComponent(Graphics g) 
+	{
+		super.paintComponent(g);
+		setBackground(Color.gray);
+  
+		g.setColor(Color.red);
+		g.setFont(new Font("Serif", Font.BOLD, 36));
+		g.drawString("Press any number for ball stop", 25, 50);
+		g.drawString("Press a,e,i,o,u for car stop", 25, 100);
+		g.drawString("The shift key changes the ball color.", 25,150);
+		g.drawString("Pressing up and down changes car speed.", 25,200);
+		g.drawString("Pressing left and right changes ball speed.", 25,250);
+		g.drawString("Press zxcvbnm for car2 stop.", 25,300);
+		g.drawString("Press f or s to go fast/slow down.", 25,350);
+  
+		// paint ball
+		g.setColor(Color.green);
+		g.fillOval(ballX, ballY, 30, 30);
+		if (switchColor == true && colorPink == true)
+		{
+			g.setColor(Color.pink);
+			g.fillOval(ballX, ballY, 30, 30);
+		}
+		else if (switchColor == true && colorPink == false)
+		{
+			g.setColor(Color.green);
+			g.fillOval(ballX, ballY, 30, 30);
+		}
+  
+		// paint car
+		g.setColor(Color.orange);
+		g.fillOval(carX+2, carY, 20, 20); // back wheel
+		g.fillOval(carX+40, carY, 20, 20); // front wheel
+		g.fillRect(carX, carY-20, 60, 20); // car body
+		g.fillRect(carX+10, carY-35, 40, 15); // car top
+		
+		g.setColor(Color.blue);
+		g.fillOval(car2X+2, car2Y, 20, 20); // back wheel
+		g.fillOval(car2X+40, car2Y, 20, 20); // front wheel
+		g.fillRect(car2X, carY-20, 60, 20); // car body
+		g.fillRect(car2X+10, car2Y-35, 40, 15); // car top
+	} // end paintComponent
+ 
+	public void keyTyped(KeyEvent e) 
+	{
+		char c = e.getKeyChar();
+		switch (c) {
+		case 'z':
+			if (carMoveIt2) cartimer2.stop();
+			else
+			cartimer2.start();
+			carMoveIt2 = ! carMoveIt2;
+			break;
+		case 'x':
+			if (carMoveIt2) cartimer2.stop();
+			else
+			cartimer2.start();
+			carMoveIt2 = ! carMoveIt2;
+			break;
+		case 'c':
+			if (carMoveIt2) cartimer2.stop();
+			else
+			cartimer2.start();
+			carMoveIt2 = ! carMoveIt2;
+			break;
+		case 'v':
+			if (carMoveIt2) cartimer2.stop();
+			else
+			cartimer2.start();
+			carMoveIt2 = ! carMoveIt2;
+			break;
+		case 'b':
+			if (carMoveIt2) cartimer2.stop();
+			else
+			cartimer2.start();
+			carMoveIt2 = ! carMoveIt2;
+			break;
+		case 'n':
+			if (carMoveIt2) cartimer2.stop();
+			else
+			cartimer2.start();
+			carMoveIt2 = ! carMoveIt2;
+			break;
+		case 'm':
+			if (carMoveIt2) cartimer2.stop();
+			else
+			cartimer2.start();
+			carMoveIt2 = ! carMoveIt2;
+			break;
+		
+			
+			
+		case 'a':
+			if (carMoveIt) cartimer.stop();
+			else cartimer.start();
+			carMoveIt = ! carMoveIt;
+			break;
+		case 'e':
+			if (carMoveIt) cartimer.stop();
+			else cartimer.start();
+			carMoveIt = ! carMoveIt;
+			break;
+		case 'i':
+			if (carMoveIt) cartimer.stop();
+			else cartimer.start();
+			carMoveIt = ! carMoveIt;
+			break;
+		case 'o':
+			if (carMoveIt) cartimer.stop();
+			else cartimer.start();
+			carMoveIt = ! carMoveIt;
+			break;
+		case 'u':
+			if (carMoveIt) cartimer.stop();
+			else cartimer.start();
+			carMoveIt = ! carMoveIt;
+			break;
+		case '1':
+			if (ballMoveIt) balltimer.stop();
+			else balltimer.start();
+			ballMoveIt = ! ballMoveIt;
+			break;
+		case '2':
+			if (ballMoveIt) balltimer.stop();
+			else balltimer.start();
+			ballMoveIt = ! ballMoveIt;
+			break;
+		case '3':
+			if (ballMoveIt) balltimer.stop();
+			else balltimer.start();
+			ballMoveIt = ! ballMoveIt;
+			break;
+		case '4':
+			if (ballMoveIt) balltimer.stop();
+			else balltimer.start();
+			ballMoveIt = ! ballMoveIt;
+			break;
+		case '5':
+			if (ballMoveIt) balltimer.stop();
+			else balltimer.start();
+			ballMoveIt = ! ballMoveIt;
+			break;
+		case '6':
+			if (ballMoveIt) balltimer.stop();
+			else balltimer.start();
+			ballMoveIt = ! ballMoveIt;
+			break;
+		case '7':
+			if (ballMoveIt) balltimer.stop();
+			else balltimer.start();
+			ballMoveIt = ! ballMoveIt;
+			break;
+		case '8':
+			if (ballMoveIt) balltimer.stop();
+			else balltimer.start();
+			ballMoveIt = ! ballMoveIt;
+			break;
+		case '9':
+			if (ballMoveIt) balltimer.stop();
+			else balltimer.start();
+			ballMoveIt = ! ballMoveIt;
+			break;
+		case '0':
+			if (ballMoveIt) balltimer.stop();
+			else balltimer.start();
+			ballMoveIt = ! ballMoveIt;
+			break;
+		}
+	} // end keyPressed
+ 
+	public void keyPressed(KeyEvent e) 
+	{
+		int c = e.getKeyCode();
+		switch (c) {
+		case 16:
+			switchColor = true;
+			if (colorPink == false)
+			colorPink = true;
+			else
+			colorPink = false;
+			break;
+			
+		case KeyEvent.VK_UP:
+			cartimer.stop();
+			carSpeed--;
+			CarMover carmover = new CarMover();
+			cartimer = new Timer(carSpeed, carmover);
+			if (carMoveIt) cartimer.start();
+			break;
+		case KeyEvent.VK_DOWN:
+			cartimer.stop();
+			carSpeed++;
+			CarMover carmove = new CarMover();
+			cartimer = new Timer(carSpeed, carmove);
+			if (carMoveIt) cartimer.start();
+			break;
+		case KeyEvent.VK_RIGHT:
+			balltimer.stop();
+			ballSpeed--;
+			BallMover ballm = new BallMover();
+			balltimer = new Timer(ballSpeed, ballm);
+			if (ballMoveIt) balltimer.start();
+			break;
+		case KeyEvent.VK_LEFT:
+			balltimer.stop();
+			ballSpeed++;
+			BallMover ballmove = new BallMover();
+			balltimer = new Timer(ballSpeed, ballmove);
+			if (ballMoveIt) balltimer.start();
+			break;
+		}
+		int d = e.getKeyChar();
+		switch (d){
+		case 'f':
+			cartimer2.stop();
+			carSpeed2--;
+			CarMover1 carmov = new CarMover1();
+			cartimer2 = new Timer(carSpeed2, carmov);
+			if (carMoveIt2) cartimer2.start();
+			break;
+			
+		case 's':
+			cartimer2.stop();
+			carSpeed2++;
+			CarMover1 carmov2 = new CarMover1();
+			cartimer2 = new Timer(carSpeed2, carmov2);
+			if (carMoveIt2) cartimer2.start();
+			break;
+		}
+		
+	}
+	public void keyReleased(KeyEvent e) 
+	{
+	}
+ 
+}

@@ -1,0 +1,120 @@
+/*
+Ryan Shen
+2/27/23
+TMNT.java
+This code makes a cool TMNT fight scene.
+*/
+
+import java.awt.*;   // for classes Graphics, Color, Font, Image
+
+import java.awt.event.* ; // for classes KeyListener, MouseListener
+
+import javax.swing.* ; // for classes JFrame, JPanel, JLabel
+
+import java.io.*  ; // for classes File, IOException, ImageIO
+
+import java.util.Scanner;
+
+public class TMNT extends JFrame
+{
+	public TMNT () 
+	{
+		super ("TMNT");
+		setSize( 1200, 700);    
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);   
+		setLocation(0,0);
+		setResizable(true);
+		Panel pan = new Panel();   
+		setContentPane(pan);  
+		setVisible(true); 
+	}
+	
+	public static void main (String[] args) 
+	{
+		TMNT si = new TMNT();
+	}
+}
+  
+class Panel extends JPanel
+{  
+	Scanner kb = new Scanner(System.in);
+	int choice = 1;
+	int amount = 0;
+	int enemy = 0;
+	public Panel()
+	{  
+		//setBackground(Color.PINK);
+		System.out.print("Would you like Leonardo(1), Michelangelo(2), Raphael(3), or Donatello(4)? ");
+		choice = kb.nextInt();
+		System.out.print("How many would you like (1-5): ");
+		amount = kb.nextInt();
+		System.out.print("How many enemies would you like(1-5) ");
+		enemy = kb.nextInt();
+	}
+	public void paintComponent(Graphics g)
+	{  
+		super.paintComponent(g);
+		Image joe = new ImageIcon("Background.jpg").getImage();
+		Image bob = new ImageIcon("Logo.jpg").getImage();
+		Image april = new ImageIcon("April.jpg").getImage();
+		Image splinter = new ImageIcon("Splinter.jpg").getImage();
+		
+		Image donatello = new ImageIcon("Donatello.jpg").getImage();
+		Image raphael = new ImageIcon("Raphael.jpg").getImage();
+		Image michelangelo = new ImageIcon("Michelangelo.jpg").getImage();
+		Image leonardo = new ImageIcon("Leonardo.jpg").getImage();
+		
+		g.drawImage(joe, 0, 0, 1200, 700, null);
+		g.drawImage(bob, 500, 40, 200, 160, null);
+		g.drawImage(april, 20, 450, 90, 220, null);
+		g.drawImage(splinter, 130, 495, 100, 170, null);
+		if (choice == 1)
+		{
+			for (int i = 0;i < amount;i++)
+			{
+				g.drawImage(leonardo, 240, 495-(i*150), 160, 170, null);
+			}
+		}
+		else if (choice == 2)
+		{
+			for (int i = 0;i < amount;i++)
+			{
+				g.drawImage(michelangelo, 240, 495-(i*150), 160, 170, null);
+			}
+		}
+		else if (choice == 3)
+		{
+			for (int i = 0;i < amount;i++)
+			{
+				g.drawImage(raphael, 240, 495-(i*150), 160, 170, null);
+			}
+		}
+		else
+		{
+			for (int i = 0;i < amount;i++)
+			{
+				g.drawImage(donatello, 240, 495-(i*150), 160, 170, null);
+			}
+		}
+		Image shredder = new ImageIcon("Shredder.jpg").getImage();
+		Image rhino = new ImageIcon("Rhino.jpg").getImage();
+		Image krang = new ImageIcon("Krang.jpg").getImage();
+		Image footSoldier = new ImageIcon("FootSoldier.jpg").getImage();
+		Image bebop = new ImageIcon("Bebop.jpg").getImage();
+		
+		if (enemy > 0)
+		g.drawImage(shredder, 1070, 450, 110, 220, null);
+		if (enemy > 1)
+		g.drawImage(rhino, 930, 495, 120, 170, null); 
+		if (enemy > 2)
+		g.drawImage(krang, 790, 520, 120, 145, null);
+		if (enemy > 3)
+		g.drawImage(footSoldier, 650, 500, 120, 165, null);
+		if (enemy > 4)
+		g.drawImage(bebop, 510, 500, 120, 160, null);
+		
+		Image logo2 = new ImageIcon("Logo2.jpg").getImage();
+		g.drawImage(logo2, 10, 10, 200, 100, null);
+		g.drawImage(logo2, 990, 10, 200, 100, null);
+	} 
+}

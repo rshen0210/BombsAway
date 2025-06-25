@@ -1,0 +1,114 @@
+/*
+Ryan Shen
+11/28/22
+OrderOfFive
+This code orders the user's input in alphabetical order.
+*/
+import java.util.Scanner;
+public class OrderOfFive
+{
+	String outWord;
+	String userWord;
+	Scanner kb = new Scanner(System.in);
+	public static void main(String [] args)
+	{
+		OrderOfFive oof = new OrderOfFive();
+		oof.runner();
+	}
+	public void runner()
+	{
+		System.out.print("\n\n\n");
+		System.out.print("Would you like to run part 1(1) or part2(2)? ");
+		int prefer = kb.nextInt();
+		System.out.print("Please enter your word(s): ");
+		kb.nextLine();
+		userWord = kb.nextLine();
+		if (prefer == 1)
+		{
+			System.out.println("Here is your word organized: ");
+			FiveOrder(prefer);
+		}
+		else
+		{
+			System.out.println("Here is your word organized and staggered: ");
+			FiveOrder(prefer);
+		}
+		System.out.print("\n\n\n");
+	}
+	public void FiveOrder(int choice)
+	{
+		outWord = "";
+		for (int i = 65; i <= 90; i++)
+		{
+			for (int x = 0; x <= userWord.length()-1; x++)
+			{
+				if (userWord.charAt(x) == (char)(i))
+				{
+					outWord += (char)(i);
+				}
+			}
+		}
+		for (int i = 97; i <= 122; i++)
+		{
+			for (int x = 0; x <= userWord.length()-1; x++)
+			{
+				if (userWord.charAt(x) == (char)(i))
+				{
+					outWord += (char)(i);
+				}
+			}
+		}
+		for (int i = 32; i <= 64; i++)
+		{
+			for (int x = 0; x <= userWord.length()-1; x++)
+			{
+				if (userWord.charAt(x) == (char)(i))
+				{
+					if (i == 32)
+					{
+						outWord += "-"; 
+					}
+					else
+					{
+						outWord += (char)(i);
+					}
+				}
+			}
+		}
+		
+		for (int i = 123; i <= 126; i++)
+		{
+			for (int x = 0; x <= userWord.length()-1; x++)
+			{
+				if (userWord.charAt(x) == (char)(i))
+				{
+					outWord += (char)(i);
+				}
+			}
+		}
+		int lenOut = outWord.length()-1;
+		if (choice == 1)
+		{
+			for (int i = 0; i <= lenOut; i+=5)
+			{
+				if ((lenOut) - i <= 5)
+				System.out.println(outWord.substring(lenOut-(lenOut - i), outWord.length()));
+				else 
+				System.out.println(outWord.substring(i, i+5));
+			}
+		}
+		else
+		{
+			for (int x = 0; x < outWord.length(); x+=5)
+			{
+				for (int i = 0; i < 5; i++)
+				{
+					if (x+1 > 5 && ((i+x+1) <= outWord.length()))
+					System.out.println(outWord.substring(x,(i+x)+1));
+					else if ((x<=i+1) && (outWord.substring(x,i+1)).length() <= 5)
+					System.out.println(outWord.substring(x,i+1));
+				}
+			}
+		}
+	}
+}

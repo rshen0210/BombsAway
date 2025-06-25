@@ -1,0 +1,97 @@
+import java.awt.*;  import java.awt.event.*;
+import javax.swing.*; import javax.swing.event.*; 
+ 
+public class Calculator {
+ 
+    JButton[] arrayBtn;
+    JTextArea firstBox ;
+    JTextArea sign ;
+    JTextArea secondBox ;
+    JTextArea product ;
+    JTextArea equal ;
+    public Calculator()
+    {
+		firstBox = null;
+		sign = null;
+		secondBox = null;
+		product = null;
+		equal = null;
+	}
+     
+    public static void main(String[] args) 
+    {
+      Calculator GLS = new Calculator();
+      GLS.runIt(); 
+    }
+    
+    public void runIt()
+    {       
+        JFrame frame = new JFrame("Calculator");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 600);
+         
+        GridLayout grid = new GridLayout(5, 5,0,0);
+        frame.setLayout(grid);
+         
+		firstBox = new JTextArea();
+        firstBox.setText("0");
+        firstBox.setEditable(false);
+        frame.add(firstBox);
+        
+        sign = new JTextArea();
+        sign.setText("+");
+        sign.setEditable(false);
+        frame.add(sign);
+        
+        secondBox = new JTextArea();
+        secondBox.setText("0");
+        secondBox.setEditable(false);
+        frame.add(secondBox);
+        
+        equal = new JTextArea();
+        equal.setText("=");
+        equal.setEditable(false);
+        frame.add(equal);
+        
+        product = new JTextArea();
+        product.setText("0");
+        product.setEditable(false);
+        frame.add(product);
+        
+        
+        
+        
+        arrayBtn = new JButton[20];
+        String calcnum = "123x-456/+789  0   =";
+        String calcnum1 = "";
+        String calc = "";
+        for(int i=0; i < 20; i++) {
+			calcnum1 = ""+(calcnum.charAt(i));
+            arrayBtn[i] = new JButton(calcnum1);
+            frame.add(arrayBtn[i]);
+        }
+        ButtonHandler2 bhandler = new ButtonHandler2();
+		arrayBtn[3].addActionListener(bhandler);
+		arrayBtn[4].addActionListener(bhandler);
+		arrayBtn[8].addActionListener(bhandler);
+		arrayBtn[9].addActionListener(bhandler);
+		arrayBtn[19].addActionListener(bhandler);
+        frame.setVisible(true);
+    }
+    
+    class ButtonHandler2 implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			String command = e.getActionCommand();
+			if (command.equals("x")) {
+				System.out.println("plus");
+				arrayBtn[2].setText("plus");
+			}
+			else if(command.equals("=")) 
+			{
+				System.out.println("equals");
+				arrayBtn[4].setText("equals");
+			}
+			}
+		}
+		implements KeyListener 
+}

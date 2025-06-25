@@ -1,0 +1,63 @@
+import java.awt.*;
+import javax.swing.*;
+import java.util.Scanner;
+public class Transformers extends JFrame
+{
+	public Transformers()
+	{
+		super ("Transformers");
+		setSize( 400, 650);    
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);   
+		setLocation(200,100);
+		setResizable(true);
+		Panel pan = new Panel();   
+		setContentPane(pan);  
+		setVisible(true); 
+	}
+	public static void main(String [] args)
+	{
+		Transformers tf = new Transformers();
+	}
+}
+class Panel extends JPanel
+{
+	String color = "";
+	int choice = 0;
+	int x10 = 0;
+	Scanner kb = new Scanner(System.in);
+	public Panel()
+	{
+		setBackground(Color.BLACK);
+		
+	}
+	public void paintComponent(Graphics g)
+	{
+		//g.drawArc(30, 0, 180, 150, 180, -90);
+		//g.drawArc(30, 0, 180, 150, 180, 90);
+		//g.fillArc(30, 0, 180, 150, 180, -90);
+		//g.fillArc(30, 0, 180, 150, 180, 90);
+		/*for(int i = 0; i<800;i+=30) 
+		{
+			g.setColor(Color.BLACK);    //lines will be black
+			g.drawLine(i, 0, i, 800);   //draws vertical lines
+			g.drawLine(0, i, 800, i);   //draws horizontal lines
+		}*/
+		
+		super.paintComponent(g);
+		((Graphics2D)g).setStroke(new BasicStroke(5));
+		g.setColor(Color.BLACK);
+		g.drawRect(0,0,400,400);
+		g.drawArc(80,40,240,40,0,180);
+		g.setColor(Color.RED);
+		g.fillArc(80,0,240,40,0,180);
+		g.setColor(Color.BLACK);
+		g.drawLine(0,0,80,40);
+		g.drawLine(80,40,100,80);
+		
+		/*int [] xc = {};
+		int [] yc = {};
+		
+		g.drawPolygon(xc, yc, 12);
+		g.fillPolygon(xc, yc, 12);*/
+	}
+}

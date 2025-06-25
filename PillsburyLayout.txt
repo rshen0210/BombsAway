@@ -1,0 +1,205 @@
+/*
+ * Ryan Shen
+ * 3/22/23
+ * PillsburyLayout.java
+ * This code practices using different layouts with the use of componenets.
+*/
+
+import java.awt.*;    import javax.swing.*;
+import java.awt.event.*; import javax.swing.event.*;
+
+public class PillsburyLayout extends JFrame
+{ 
+	public static void main( String[] args )
+	{
+		PillsburyLayout pL2 = new PillsburyLayout();
+		pL2.run();
+	}
+ 
+	public PillsburyLayout()
+	{	
+		super("ButtonSlider.java");
+	}
+	public void run()
+	{
+		
+		setSize( 900, 500);    
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);   
+		setLocation(80,50);
+		setResizable(true);
+		PillsburyLayoutP2 pillsPanel2 = new PillsburyLayoutP2();   
+		setContentPane( pillsPanel2 );  // OR frame.getContentPane().add(p_in);
+		setVisible(true);  
+	}
+}
+
+class PillsburyLayoutP2 extends JPanel
+{ 
+	private boolean pressed1, pressed2;  
+	private JButton button1, button2, button3, button4; 
+	private Font font;
+	private int counter;
+	private int helloCounter;
+	private JSlider slider;
+	private int sliderValue;
+	private boolean stopPressing;
+	private boolean stopSaying;
+	private int pressCounter;
+	private boolean heehee;
+	
+	
+	public PillsburyLayoutP2() 
+	{
+ 
+		pressed1 = pressed2 = false; 
+		font = new Font ("Serif", Font.BOLD, 30);
+	  
+		setBackground( Color.YELLOW );
+		setLayout( new FlowLayout( FlowLayout.LEFT, 0, 0) ); 
+		//setLayout( new FlowLayout( FlowLayout.LEFT, 50, 50) ); 
+		
+		button1 = new JButton("Press my belly.");  // construct button 
+		button1.setPreferredSize(new Dimension(150,50));
+		Button1Handler b1handler = new Button1Handler(); // this is so the actionPerformed is dedicated to this button only
+		button1.addActionListener( b1handler );   // add listener to button
+		add( button1 );  // add button to panel (Pillsbury2)
+
+		button2 = new JButton("Hello"); 
+		button2.setPreferredSize(new Dimension(75,50));
+		Button2Handler b2handler = new Button2Handler();
+		button2.addActionListener( b2handler ); 
+		add( button2 ); 
+
+		button3 = new JButton("Press my belly.");
+		button3.setPreferredSize(new Dimension(150,50));
+		Button1Handler b3handler = new Button1Handler();
+		button3.addActionListener( b1handler );
+		add( button3 );
+
+		button4 = new JButton("Hello"); 
+		button4.setPreferredSize(new Dimension(75,50));
+		Button2Handler b4handler = new Button2Handler();
+		button4.addActionListener( b2handler );
+		add( button4 ); 
+
+		JPanel jp = new JPanel();  
+		add ( jp );
+  
+  
+		slider = new JSlider (JSlider.HORIZONTAL, 10, 125, 12);  // construct slider bar 
+		slider.setInverted(true);
+		slider.setMajorTickSpacing(50); // create tick marks on slider every 40 units
+		slider.setMinorTickSpacing(10);
+		slider.setForeground(Color.BLUE);
+		slider.setPaintTicks(true);
+		slider.setLabelTable( slider.createStandardLabels(50) ); // create labels on tick marks
+
+		slider.setPaintLabels(true);
+		SliderHandler sHandler = new SliderHandler();
+		add(slider);  // add button to panel 
+		slider.addChangeListener( sHandler );   // add listener to slider
+		sliderValue = 12;
+	}
+ 
+	public void paintComponent(Graphics g) 
+	{
+		super.paintComponent (g);
+		setBackground(Color.blue);
+	  
+		Font f = new Font("Serif", Font.BOLD, sliderValue);
+		g.setFont(f);
+		g.drawString ("Move the slider to see",100, 250 );
+		g.drawString("the font size change",100,250+sliderValue);
+		Image Pillsbury = new ImageIcon("Pillbury-Doughboy1.jpg").getImage();
+		
+		if (pressed1 && !stopPressing && !stopSaying)
+		{
+			g.setFont( font );
+			g.drawString("Hee-Hee", 100, 150);  
+			g.drawImage(Pillsbury, 20, 300, 100, 190, null);
+			g.drawString("You're wonderful!", 150, 450);
+			heehee = true;
+			pressed1 = false;
+		}
+		if (pressed2 && !stopSaying && !stopPressing)
+		{
+			g.setFont( font );
+			g.drawString("You say", 200, 150);  
+			pressed2 = false; 
+		}
+		if (stopSaying)
+		{
+			g.drawString("Stop saying Hello", 100,150);
+			helloCounter = 0;
+		}
+		if (stopPressing)
+		{
+			g.drawString("Stop pressing my belly", 100,150);
+			pressCounter = 0;
+		}
+
+	}
+ 
+	class Button1Handler implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			String command = e.getActionCommand();
+			if (pressCounter == 0)
+			stopPressing = false;
+			
+			if (helloCounter == 0)
+			stopSaying = false;
+			
+			heehee = false;
+			if ( command.equals ("Press my belly.") ) 
+			{   
+				pressed1 = true;   
+				pressCounter++;
+				if (pressCounter == 5)
+				stopPressing = true;
+				button1.setText ("reset");  
+			}  
+			else  
+			button1.setText("Press my belly."); 
+			pressed2 = false;
+			repaint();
+		}
+	} // end class Button1Handler 
+ 
+	class Button2Handler implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent e) 
+		{
+			String command2 = e.getActionCommand();
+			if (helloCounter == 0)
+			stopSaying = false;
+			
+			if (pressCounter == 0)
+			stopPressing = false;
+			heehee = false;
+			if ( command2.equals ("Hello") ) 
+			{   
+				pressed2 = true;  
+				helloCounter++; 
+				if (helloCounter == 4)
+				stopSaying = true;
+				button2.setText ("Goodbye");  
+			}  
+			else  
+			button2.setText("Hello"); 
+			
+			pressed1 = false;
+			repaint();
+		}
+	} // end class Button2Handler 
+ 
+	class SliderHandler implements ChangeListener
+	{
+		public void stateChanged(ChangeEvent e)
+		{    //  event handler for JSliderBar (stateChanged)
+			sliderValue = slider.getValue();
+			repaint();
+		} 
+	}
+}

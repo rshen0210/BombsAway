@@ -1,0 +1,137 @@
+/*
+Ryan Shen
+12/2/22
+ThreeWords
+This code asks for three strings from the user, and outputs multiple recurring letters in 
+alphabetical order.
+*/
+import java.util.Scanner;
+
+public class ThreeWords 
+{
+	Scanner in;
+	
+	public ThreeWords() 
+	{
+		in = new Scanner(System.in);
+	}
+	
+	public static void main (String[] args) 
+	{
+		ThreeWords tw = new ThreeWords();
+		tw.runner();
+	}
+
+	public void runner() 
+	{
+		System.out.print("\n\n\n");
+
+		String word1;
+		String word2;
+		String word3;
+
+		System.out.println("Please enter 3 strings: ");
+		word1 = in.next();
+		word2 = in.next();
+		word3 = in.next();
+
+		System.out.println("\nOutput:");
+		letters(word1, word2, word3);
+
+		System.out.print("\n\n\n");
+	}
+
+	public void letters(String w1, String w2, String w3) 
+	{
+		String three = "";
+		String two = "";
+		String one = "";
+
+		boolean match1 = false;
+		boolean match2 = false;
+		boolean match3 = false;
+
+		for (int i = 97; i<= 122; i++) 
+		{
+			for (int j = 0; j < w1.length(); j++) 
+			{
+				if ((char) i == w1.charAt(j) || (char)(i-32) == w1.charAt(j) && !match1) 
+				{
+					match1 = true;
+				}
+			}
+
+			for (int k = 0; k < w2.length(); k++) 
+			{
+				if ((char) i == w2.charAt(k) || (char)(i-32) == w2.charAt(k) && !match2) 
+				{
+					match2 = true;
+				}
+			}
+
+			for (int l = 0; l < w3.length(); l++) 
+			{
+				if ((char) i == w3.charAt(l) || (char)(i-32) == w3.charAt(l) && !match3) 
+				{
+					match3 = true;
+				}
+			}
+			
+			if (match3 && match2  && match1) 
+			{
+				three += (char) i + ", ";
+				match1 = false;
+				match2 = false;
+				match3 = false;
+			}
+			else if ((match1 && match2) || (match2 && match3) || (match1 && match3)) 
+			{
+				two += (char) i + ", ";
+				match1 = false;
+				match2 = false;
+				match3 = false;
+			}
+			else if (match1 || match2 || match3) 
+			{
+				one += (char) i + ", ";
+				match1 = false;
+				match2 = false;
+				match3 = false;
+			}
+		}
+
+		if (one == "") 
+		{
+			one = "none";
+		}
+		if (two == "") 
+		{
+			two = "none";
+		}
+		if (three == "") 
+		{
+			three = "none";
+		}
+
+		System.out.println("Letter(s) that appear in all three words:");
+		if (three.charAt(three.length()-2) == ',') 
+		{
+			three = three.substring(0, three.length()-2);
+		}
+		System.out.println(three);
+
+		System.out.println("\nLetter(s) that appear in two words:");
+		if (two.charAt(two.length()-2) == ',') 
+		{
+			two = two.substring(0, two.length()-2);
+		}
+		System.out.println(two);
+
+		System.out.println("\nLetter(s) that appear in only one word:");
+		if (one.charAt(one.length()-2) == ',') 
+		{
+			one = one.substring(0, one.length()-2);
+		}
+		System.out.println(one);
+	}
+}

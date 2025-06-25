@@ -1,0 +1,11 @@
+Name Gender
+1)  Santiago            Male
+2)  Sebastian           Male
+3)  Matias              Male
+4)  Mateo               Male
+5)  Nicolas             Male
+6)  Sofia               Female
+7)  Isabella            Female
+8)  Camila              Female
+9)  Valentina           Female
+10) Valeria             Female

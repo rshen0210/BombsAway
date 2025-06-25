@@ -1,0 +1,88 @@
+Algeria	2
+Argentina	4
+Armenia	4
+Australia	29
+Austria	1
+Azerbaijan	18
+Bahamas	2
+Bahrain	2
+Belarus	9
+Belgium	6
+Brazil	19
+Bulgaria	3
+Burundi	1
+Canada	22
+China	70
+Chinese Taipei	3
+Colombia	8
+Cote d'Ivoire	2
+Croatia	10
+Cuba	11
+Czech Republic	10
+Denmark	15
+Dominican Republic	1
+Egypt	3
+Estonia	1
+Ethiopia	8
+Fiji	1
+Finland	1
+France	42
+Georgia	7
+Germany	42
+Great Britain	67
+Greece	6
+Grenada	1
+Hungary	15
+Independent Athletes	2
+India	2
+Indonesia	3
+Iran	8
+Ireland	2
+Israel	2
+Italy	28
+Jamaica	11
+Japan	41
+Jordan	1
+Kazakhstan	17
+Kenya	13
+Korea, Republic Of	21
+Korea, Republic Of	7
+Kosovo	1
+Kyrgyzstan	0
+Lithuania	4
+Malaysia	5
+Mexico	5
+Moldova	1
+Mongolia	2
+Morocco	1
+Netherlands	19
+New Zealand	18
+Niger	1
+Nigeria	1
+Norway	4
+Philippines	1
+Poland	11
+Portugal	1
+Puerto Rico	1
+Qatar	1
+Romania	5
+Russian Federation	56
+Serbia	8
+Singapore	1
+Slovakia	4
+Slovenia	4
+South Africa	10
+Spain	17
+Sweden	11
+Switzerland	7
+Tajikistan	1
+Thailand	6
+Trinidad And Tobago	1
+Tunisia	3
+Turkey	8
+Ukraine	11
+United Arab Emirates	1
+United States	135
+Uzbekistan	13
+Venezuela	3
+Vietnam	2
